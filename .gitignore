@@ -1,2 +1,4 @@
 data/
 docks/
+notebooks/.ipynb_checkpoints
+.DS_Store

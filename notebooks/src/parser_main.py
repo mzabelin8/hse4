@@ -121,13 +121,8 @@ def get_ward_list(data):
     section_fields = find_section_by_optimized_path(data, SUB_PATH + short_path_to_section)
     return section_fields
 
-def get_final(data):
-    short_path_to_section = ['component', 4, 
-                             'section']
 
-
-    section_fields = find_section_by_optimized_path(data, SUB_PATH + short_path_to_section)
-    return section_fields
+    
 
 
 def get_ward_name(data, i):
@@ -180,3 +175,29 @@ def compute_full_wards(data):
 
         ward_result[ward_name] = research_result
     return ward_result
+
+
+
+def get_final_table1(data, type='table'):
+    short_path_to_section = ['component', 4, 
+                             'section', 
+                             'text']
+
+    section_fields = find_section_by_optimized_path(data, SUB_PATH + short_path_to_section)
+    table = section_fields
+    if type == 'table':
+        table = parse_table_2(section_fields)
+    return table
+
+
+def get_final_table2(data, type='table'):
+    short_path_to_section = ['component', 4,
+                             'section',
+                             'component', 
+                             'section', 'text']
+
+    section_fields = find_section_by_optimized_path(data, SUB_PATH + short_path_to_section)
+    table = section_fields
+    if type == 'table':
+        table = parse_table_2(section_fields)
+    return table

@@ -47,6 +47,40 @@ def parse_table(json_data, prefix = '{urn:hl7-org:v3}'):
     adjusted_df = pd.DataFrame(adjusted_rows, columns=headers)
     return adjusted_df
 
+def parse_table_2(json_data, prefix = '{urn:hl7-org:v3}'):
+
+    """
+    For small tables works better.
+    """
+
+    adjusted_rows = []
+    headers = [header['text'] for header in json_data[f'{prefix}table'][f'{prefix}thead'][f'{prefix}tr'][f'{prefix}th']]
+
+    # Get the table rows
+    rows = json_data[f'{prefix}table'][f'{prefix}tbody'][f'{prefix}tr']
+    
+    # If rows is a dictionary (single row), convert it to a list
+    if isinstance(rows, dict):
+        rows = [rows]
+
+    # Process each row
+    for row in rows:
+        current_row = []
+        for cell in row[f'{prefix}td']:
+            # Handle cases where content might be missing or empty
+            text_content = cell[f'{prefix}content'].get('text', 'None')
+            current_row.append(text_content)
+        
+        # Check if the row has fewer items than headers, and pad with 'None' for missing values
+        while len(current_row) < len(headers):
+            current_row.append('None')  # Assuming 'None' for missing data
+        
+        adjusted_rows.append(current_row)
+
+    # Recreate the DataFrame with adjusted rows
+    adjusted_df = pd.DataFrame(adjusted_rows, columns=headers)
+    return adjusted_df
+
 
 def parse_table_wtheader(json_data, prefix = '{urn:hl7-org:v3}'):
     adjusted_rows = []

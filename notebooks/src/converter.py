@@ -87,11 +87,16 @@ def modify_json(in_path, out_path):
     ward_table = get_ward_table(data, type='raw')
     result['ward_table'] = ward_table
 
-    ward_list = get_ward_list(data)
+    ward_list = compute_full_wards(data)
     result['ward_list'] = ward_list
-    
-    final = get_final(data)
-    result['final'] = final
+
+    final_table1 = get_final_table1(data, type='raw')
+    result['final_table1'] = final_table1
+
+    final_table2 = get_final_table2(data, type='raw')
+    result['final_table2'] = final_table2
+
+
 
     with open(out_path, "w", encoding='utf-8') as file:
         json.dump(result, file, ensure_ascii=False, indent=4)

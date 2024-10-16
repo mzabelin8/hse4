@@ -113,6 +113,9 @@ def get_amnez_life(data):
     return section_fields['text']
 
 def get_ward_list(data):
+    '''
+    Вся информация по отдлениям.
+    '''
     short_path_to_section = ['component', 3, 
                              'section', 
                              'component']
@@ -133,7 +136,13 @@ def get_ward_name(data, i):
     return section_fields['text']
 
 
+
+
 def get_research_list(data, i):
+
+    """
+    Всегда ли лист возвращается?
+    """
     short_path_to_section = [i, 'section']
 
     section_fields = find_section_by_optimized_path(data, short_path_to_section)
@@ -144,13 +153,21 @@ def get_research_list(data, i):
     return None
 
 def get_research_name(data, i):
-    return get_ward_name(data, i)
-
-def get_research_table(data, i, type='table'):
-    short_path_to_section = [i, 'section', 'text']
+    short_path_to_section = ['section', 'title']
+    if type(data) == list:
+        short_path_to_section = [i, 'section', 'title']
 
     section_fields = find_section_by_optimized_path(data, short_path_to_section)
-    if type != 'table':
+    return section_fields['text']
+
+def get_research_table(data, i, typed='table'):
+    short_path_to_section = ['section', 'text']
+
+    if type(data) == list:
+        short_path_to_section = [i, 'section', 'text']
+
+    section_fields = find_section_by_optimized_path(data, short_path_to_section)
+    if typed != 'table':
         return section_fields
         
     table = parse_table_wtheader(section_fields)

@@ -3,3 +3,5 @@ docks/
 notebooks/.ipynb_checkpoints
 .DS_Store
 notebooks/test_wards1.ipynb
+notebooks/poetry.lock
+notebooks/pyproject.toml

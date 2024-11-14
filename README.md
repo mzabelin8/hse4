@@ -1,4 +1,4 @@
-notebooks/src - folder with all functions
+src - folder with all functions for parsing
 
 
-notebooks/example_2 - how to use it
+notebooks/example - how to use it
